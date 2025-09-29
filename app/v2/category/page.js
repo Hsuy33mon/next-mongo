@@ -1,24 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import CategoryForm from "@/app/v2/components/forms/CategoryForm";
-import Link from "next/link";
 
-import { DataGrid, GridToolbar , GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 import Modal from "@mui/material/Modal";
 
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 
-import IconButton from "@mui/material/IconButton";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import IconButton from "@mui/material/IconButton";
 
 export default function Home() {
   const [category, setCategory] = useState([]);
@@ -30,7 +21,7 @@ export default function Home() {
   const API_BASE = process.env.NEXT_PUBLIC_API_URL;
   console.log(`${API_BASE}/category`);
   async function fetchCategory() {
-    const data = await fetch(`${APIBASE}/category`);
+    const data = await fetch(`${API_BASE}/category`);
     const c = await data.json();
     const c2 = c.map((category) => {
       category.id = category._id;
@@ -50,7 +41,7 @@ export default function Home() {
   function handleCategoryFormSubmit(data) {
     if (editMode) {
       // data.id = data._id
-      fetch(`${APIBASE}/category`, {
+      fetch(`${API_BASE}/category`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +53,7 @@ export default function Home() {
       });
       return
     }
-    fetch(`${APIBASE}/category`, {
+    fetch(`${API_BASE}/category`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
